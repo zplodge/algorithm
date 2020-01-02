@@ -1,28 +1,32 @@
-1. # builid and run command is as follow:
+1. # 单链表翻转
 
-  ./run.sh
+   1. 定义三个指针， 分别标记上一个元素（prev）、当前元素(current)和临时变量(temp)；
 
-2. ## test case type is as follow:
-	
-	1. calculate route distance with the route path
-	
-	2. calculate the route path with max hops
-	
-	3. calculate the route path with fixed hops
-	
-	4. calculate the shortest route form start to end
-	
-	5. calculate the route path with max distance
-	
-	   
-	
-3. ## 单链表队列
+   2. 初始化当前元素为链表的head地址； 上一个元素(prev)和临时变量(temp)为空；
 
-   1. head和tail初始值都为空；
-   2. 初始化申请一块内存， head和tail都指向该内存块；
-   3. 入队操作时新申请一块内存存储入队数据，链接到链表尾部，移动tail到链表尾部；
-   4.  出队的时候弹出head->next指针；然后释放head内存；
+   3. 当当前元素(current)不为空的时候，临时变量(temp)指向当前元素(current)， 临时变量(temp)的下一个元素指向上一个元素(prev);
 
-   
+   4. 当前元素(current)指向当前元素(current)的下一个元素，上一个元素（prev）指向临时变量的地址；
 
-   
+   5. 此时翻转即完成；
+
+      ```
+      while(current)
+      
+      {
+      
+      ​	temp = current;
+      
+      ​	temp->next = prev;
+      
+      ​	current = current->next;
+      
+      ​	prev = temp;
+      
+      }
+      ```
+
+      
+
+
+
