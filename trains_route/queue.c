@@ -3,7 +3,7 @@
  * @emial: zhangpeng@tuya.com
  * @Date: 2019-10-16 23:33:08
  * @LastEditors: Leon
- * @LastEditTime: 2019-12-08 14:33:01
+ * @LastEditTime: 2020-01-12 14:34:32
  * @file name: queue.c
  * @Description: this file is the queue source files 
  * @Copyright: 
@@ -34,6 +34,17 @@ void queue_init(void)
 	{
 		printf("no enough space \n\r");
 	}
+}
+
+/**
+ * @description: get queue head ptr
+ * @param in: NULL
+ * @param out: NULL
+ * @return: NULL
+ */
+queue_list_t* get_queue_head(void)
+{
+	return head;
 }
 
 /**
@@ -94,19 +105,39 @@ bool_t queue_pop(queue_list_t* out_data)
 	return TRUE;
 }
 
+/**
+ * @description: is element exist in the queue 
+ * @param in: data
+ * @param out: NULL
+ * @return: true or false
+ */
+bool_t queue_element_exist(int node)
+{
+	queue_list_t* pos = NULL;
+	for(pos = head; pos != NULL; pos = pos->next)
+	{
+		if(node == pos->node)
+		{
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+/**
+ * @description: delete the queue and free the buffer 
+ * @param in: NULL
+ * @param out: NULL
+ * @return: NULL
+ */
 void queue_deinit(void)
 {
-	queue_list_t *head_position = NULL;
+	queue_list_t *current_head = NULL;
 
-	while(head != tail)
+	while(head)
 	{
-		head_position = head;
-		
-		if(head->next)
-		{
-			head = head->next;
-		}
-		
-		free(head_position);
+		current_head = head;
+		head = head->next;
+		free(current_head);
 	}
 }
